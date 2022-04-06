@@ -21,10 +21,10 @@ blueprint:
 mode: single
 trigger:
   - platform: state
-    entity_id: !input 'secondary_light'
+    entity_id: !input secondary_light
     to: "on"
   - platform: state
-    entity_id: !input 'primary_light'
+    entity_id: !input primary_light
     to: "off"
 
 action:
@@ -34,11 +34,11 @@ action:
           value_template: "{{ trigger.to_state.state == 'on' }}"
       sequence:
         - service: light.turn_on
-          entity_id: !input 'primary_light'
+          entity_id: !input primary_light
     - conditions:
         - condition: template
           value_template: "{{ trigger.to_state.state == 'off' }}"
       sequence:
         - service: light.turn_off
-          entity_id: !input 'secondary_light'
+          entity_id: !input secondary_light
   default: []
